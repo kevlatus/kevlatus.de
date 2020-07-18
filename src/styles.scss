@@ -24,6 +24,15 @@ body.themeio-dark {
   color: #fff;
 }
 
+.flex-v {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-v.flex-center-cross {
+  align-items: center;
+}
+
 .flex-spacer {
   flex: 1 1 auto;
 }

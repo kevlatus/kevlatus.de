@@ -1,0 +1,18 @@
+:host {
+  display: inline-block;
+}
+
+a {
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  width: 38px;
+  height: 38px;
+}
+
+kev-svg-icon {
+  --svg-icon-color: var(--color-primary);
+  --svg-icon-width: 24px;
+  --svg-icon-height: 24px;
+  padding: 7px;
+}
