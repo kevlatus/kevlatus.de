@@ -1,0 +1,37 @@
+name: Deploy
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: actions/setup-node@master
+
+      - name: Install dependencies
+        run: npm ci
+
+      #- name: Lint
+      #  run: npm run lint
+
+      # - name: Run tests
+      #   run: npm run test -- --no-watch --browsers=ChromeHeadless
+
+      - name: Build Angular app
+        run: npm run build -- --prod
+
+      - name: Run Scully
+        run: npm run scully
+
+      - name: Deploy to branch "netlify"
+        uses: s0/git-publish-subdir-action@master
+        env:
+          REPO: self
+          BRANCH: netlify
+          FOLDER: dist/static
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
