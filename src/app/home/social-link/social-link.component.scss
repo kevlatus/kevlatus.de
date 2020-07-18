@@ -10,9 +10,9 @@ a {
   height: 38px;
 }
 
-kev-svg-icon {
-  --svg-icon-color: var(--color-primary);
-  --svg-icon-width: 24px;
-  --svg-icon-height: 24px;
+kev-svg-icon ::ng-deep svg {
+  fill: var(--color-primary);
+  width: 24px;
+  height: 24px;
   padding: 7px;
 }

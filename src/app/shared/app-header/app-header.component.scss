@@ -15,7 +15,9 @@
 }
 
 .app-icon {
-  --svg-icon-color: var(--color-primary);
+  width: 48px;
+  height: 48px;
+  fill: var(--color-primary);
 }
 
 .links {

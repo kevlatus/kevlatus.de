@@ -1,15 +1,3 @@
 :host {
-  --svg-icon-width: 48px;
-  --svg-icon-height: 48px;
-  --svg-icon-color: #000;
-
   display: block;
-  width: var(--svg-icon-width);
-  height: var(--svg-icon-height);
-}
-
-::slotted(svg) {
-  width: var(--svg-icon-width);
-  height: var(--svg-icon-height);
-  fill: var(--svg-icon-color);
 }
