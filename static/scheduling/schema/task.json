@@ -1,0 +1,21 @@
+{
+  "$id": "http://kevlatus.de/scheduling/schema/task#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Representation of a production task",
+  "type": "object",
+
+  "properties": {
+    "id": {
+      "type": "number"
+    },
+    "name": {
+      "type": "string"
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -28,6 +28,9 @@ jobs:
       - name: Run Scully
         run: npm run scully
 
+      - name: Copy static content
+        run: cp -r static/* dist/static/
+
       - name: Deploy to branch "netlify"
         uses: s0/git-publish-subdir-action@master
         env:
