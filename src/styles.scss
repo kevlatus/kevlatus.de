@@ -6,7 +6,6 @@ body {
   padding: 0;
   height: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  transition: all 300ms ease-in-out;
 }
 
 body.themeio-light {
@@ -22,6 +21,10 @@ body.themeio-dark {
   --card-background: #404040;
   background-color: #303030;
   color: #fff;
+}
+
+.animate-all {
+  transition: all 300ms ease-in-out;
 }
 
 .flex-v {
