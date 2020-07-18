@@ -1,0 +1,36 @@
+:host {
+  min-width: 38px;
+  max-width: 38px;
+  min-height: 18px;
+  max-height: 18px;
+  position: relative;
+  cursor: pointer;
+}
+
+.background {
+  position: absolute;
+  width: 36px;
+  height: 16px;
+  margin: 1px;
+  background: #bababa;
+  border-radius: 16px;
+  transition: background-color 300ms ease-in-out;
+}
+
+.circle {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  transition: transform 300ms ease-in-out, background-color 300ms ease-in-out;
+}
+
+:host(.toggled) .background {
+  background-color: rgba(var(--color-accent-rgb), 0.5);
+}
+
+:host(.toggled) .circle {
+  transform: translateX(20px);
+  background-color: var(--color-accent);
+}

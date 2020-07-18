@@ -25,6 +25,7 @@
     "@scullyio/ng-lib": "^1.0.0-beta.0",
     "@scullyio/scully": "^1.0.0-beta.0",
     "rxjs": "~6.5.4",
+    "themeio": "^0.4.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

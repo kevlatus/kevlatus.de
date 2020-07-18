@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  --color-primary: rgb(var(--color-primary-rgb));
+  --color-accent: rgb(var(--color-accent-rgb));
+  --background-color: rgba(var(--color-primary-rgb), 0.3);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: all 300ms ease-in-out;
+}
+
+body.themeio-light {
+  --color-primary-rgb: 66, 158, 157;
+  --color-accent-rgb: 255, 116, 124;
+  --card-background: #fff;
+  background-color: var(--background-color);
+}
+
+body.themeio-dark {
+  --color-primary-rgb: 161, 207, 206;
+  --color-accent-rgb: 207, 161, 162;
+  --card-background: #404040;
+  background-color: #303030;
+  color: #fff;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}

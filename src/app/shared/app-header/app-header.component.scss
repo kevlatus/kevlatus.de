@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  padding: 0 16px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  max-width: 800px;
+  height: 100%;
+}
+
+.app-icon {
+  --svg-icon-color: var(--color-primary);
+}
+
+.links {
+  display: flex;
+}
+
+.links > :not(:first-child) {
+  margin-left: 16px;
+}
