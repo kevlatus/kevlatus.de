@@ -1,0 +1,33 @@
+.article {
+  font-family: rooney-web, serif;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.article pre code {
+  font-family: source-code-pro, monospace;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.article pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.article pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.article pre::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 8px;
+}
+
+.h1 {
+  margin-bottom: 0.2em !important;
+}
+
+.meta {
+  font-size: 0.7em !important;
+}

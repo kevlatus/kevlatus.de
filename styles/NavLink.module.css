@@ -1,0 +1,24 @@
+.link {
+  position: relative;
+}
+
+.link .brush {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 300ms;
+  transform: scale(1.5);
+  z-index: -1;
+  fill: var(--color-accent);
+}
+
+.link.active .brush {
+  opacity: 0.3;
+}
+
+.link:hover .brush {
+  opacity: 0.5;
+}

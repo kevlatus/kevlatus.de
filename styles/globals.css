@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.themeio-light {
+  --color-primary-rgb: 55, 134, 233;
+  --color-primary: rgb(var(--color-primary-rgb));
+  --color-primary-o2: rgba(var(--color-primary-rgb), 0.2);
+
+  --color-accent-rgb: 233, 157, 58;
+  --color-accent: rgb(var(--color-accent-rgb));
+  --color-accent-o2: rgba(var(--color-accent-rgb), 0.2);
+
+  --color-tertiary: #9A3AE9;
+
+  --color-text: #000;
+  --color-text-primary: #fff;
+
+  --color-background: #fafafa;
+
+  --color-code-string: #89E93A;
+}
+
+.themeio-dark {
+  --color-primary-rgb: 155, 195, 244;
+  --color-primary: rgb(var(--color-primary-rgb));
+  --color-primary-o2: rgba(var(--color-primary-rgb), 0.2);
+
+  --color-accent-rgb: 244, 206, 158;
+  --color-accent: rgb(var(--color-accent-rgb));
+  --color-accent-o2: rgba(var(--color-accent-rgb), 0.2);
+
+  --color-tertiary: #CC9FF4;
+
+  --color-text: #fff;
+  --color-text-primary: #000;
+
+  --color-background: #202020;
+
+  --color-code-string: #C7F49F;
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 8px;
+}
+
+html {
+  font-family: stencil-creek, sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: 36px;
+  }
+}
+
+@media only screen and (min-width: 1536px) {
+  html {
+    font-size: 48px;
+  }
+}
