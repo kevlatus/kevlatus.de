@@ -1,3 +1,10 @@
 {
-  "posts": []
+  "posts": [
+    {
+      "slug": "how-to-start-a-casino-in-flutter",
+      "title": "How to start a Casino in Flutter",
+      "content": "/assets/blog/articles/how-to-start-a-casino-in-flutter.md",
+      "timestamp": "2021-01-08T14:15:59.376Z"
+    }
+  ]
 }

@@ -1,11 +1,4 @@
-const baseURL =
-  process.env.NODE_ENV === "production"
-    ? "https://kevlatus.de"
-    : "http://localhost:3000";
-
-function getURL(path: string): string {
-  return new URL(path, baseURL).toString();
-}
+import { promises as fs } from "fs";
 
 interface BlogPostList {
   readonly posts: BlogPost[];
@@ -21,18 +14,18 @@ export interface BlogPost {
 async function fillContent(def: BlogPost): Promise<BlogPost> {
   return {
     ...def,
-    content: await fetchBlogPostContent(getURL(def.content)),
+    content: await fetchBlogPostContent(def.content),
   };
 }
 
 async function fetchBlogPostContent(path: string): Promise<string> {
-  const response = await fetch(path);
-  return await response.text();
+  const content = await fs.readFile(`./public/${path}`);
+  return content.toString();
 }
 
 async function fetchBlogPostList(): Promise<BlogPostList> {
-  const response = await fetch(getURL("/assets/blog/articles.json"));
-  return await response.json();
+  const content = await fs.readFile("./public/assets/blog/articles.json");
+  return JSON.parse(content.toString());
 }
 
 export async function fetchBlogPostBySlug(slug: string): Promise<BlogPost> {
@@ -47,9 +40,5 @@ export async function fetchBlogPostBySlug(slug: string): Promise<BlogPost> {
 
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
   const defs = await fetchBlogPostList();
-  const ret: BlogPost[] = [];
-  for (const def of defs.posts) {
-    ret.push(await fillContent(def));
-  }
-  return ret;
+  return defs.posts;
 }
