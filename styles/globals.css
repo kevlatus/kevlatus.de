@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.themeio-light {
+body.light {
   --color-primary-rgb: 55, 134, 233;
   --color-primary: rgb(var(--color-primary-rgb));
   --color-primary-o2: rgba(var(--color-primary-rgb), 0.2);
@@ -21,7 +21,7 @@
   --color-code-string: #89E93A;
 }
 
-.themeio-dark {
+body.dark {
   --color-primary-rgb: 155, 195, 244;
   --color-primary: rgb(var(--color-primary-rgb));
   --color-primary-o2: rgba(var(--color-primary-rgb), 0.2);
