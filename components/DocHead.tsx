@@ -6,6 +6,7 @@ const DocHead: FunctionComponent = function () {
 		<Head>
 			<title>Kevin Latusinski</title>
 			<link rel="icon" href="/favicon.ico" />
+      <link rel="preload" href="https://use.typekit.net/xhs5wzt.css" />
 			<link rel="stylesheet" href="https://use.typekit.net/xhs5wzt.css" />
 		</Head>
 	);
