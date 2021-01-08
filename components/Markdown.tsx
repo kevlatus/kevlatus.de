@@ -1,6 +1,13 @@
 import { FunctionComponent } from "react";
 import ReactMarkdown from "react-markdown/with-html";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
+import css from 'react-syntax-highlighter/dist/cjs/languages/hljs/css';
+import dart from 'react-syntax-highlighter/dist/cjs/languages/hljs/dart';
+import ts from 'react-syntax-highlighter/dist/cjs/languages/hljs/typescript';
+
+SyntaxHighlighter.registerLanguage('css', css);
+SyntaxHighlighter.registerLanguage('dart', dart);
+SyntaxHighlighter.registerLanguage('typescript', ts);
 
 const customHighlightStyle = {
   hljs: {
