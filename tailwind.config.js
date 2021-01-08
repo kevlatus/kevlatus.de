@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ["./pages/**/*.js", "./components/**/*.js"],
+  purge: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
   theme: {
     extend: {
@@ -58,10 +58,10 @@ module.exports = {
               padding: "2px 4px",
             },
             "code::before": {
-              content: ""
+              content: "",
             },
             "code::after": {
-              content: ""
+              content: "",
             },
           },
         },
