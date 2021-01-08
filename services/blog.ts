@@ -40,5 +40,9 @@ export async function fetchBlogPostBySlug(slug: string): Promise<BlogPost> {
 
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
   const defs = await fetchBlogPostList();
-  return defs.posts;
+  const ret: BlogPost[] = [];
+  for (const post of defs.posts) {
+    ret.push(await fillContent(post));
+  }
+  return ret;
 }

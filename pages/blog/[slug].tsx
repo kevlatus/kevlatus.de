@@ -10,43 +10,9 @@ import {
 import DocHead from "../../components/DocHead";
 import AppLayout from "../../components/AppLayout";
 import Markdown from "../../components/Markdown";
+import MetaInfo from "../../components/blog/MetaInfo";
 
 import styles from "../../styles/BlogPostPage.module.css";
-
-function getReadingTime(text: string): number {
-  text = text.replace(/[^a-zA-Z0-9.!?:;\-()\s]/g, "");
-  const wordsPerMinute = 200;
-  const textLength = text.split(" ").length;
-  return textLength > 0 ? Math.ceil(textLength / wordsPerMinute) : 0;
-}
-
-function MetaInfo(props: { post: BlogPost }) {
-  const date = new Date(Date.parse(props.post.timestamp));
-  const day = date.getDate().toString().padStart(2, "0");
-  const month = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ][date.getMonth()];
-  const year = date.getFullYear();
-
-  const readingTime = getReadingTime(props.post.content);
-
-  return (
-    <div
-      className={styles.meta}
-    >{`${day} ${month} ${year} | ~${readingTime} min read`}</div>
-  );
-}
 
 interface BlogPostPageProps {
   readonly post: BlogPost;
@@ -65,7 +31,7 @@ const BlogPostPage: FunctionComponent<BlogPostPageProps> = function ({ post }) {
         <main className="flex-grow px-2 py-4">
           <article className={contentClass}>
             <h1 className={styles.h1}>{post.title}</h1>
-            <MetaInfo post={post} />
+            <MetaInfo post={post} className={styles.meta} />
             <Markdown className={contentClass} markdown={post.content} />
           </article>
         </main>
