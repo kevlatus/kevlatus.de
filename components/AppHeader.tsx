@@ -4,7 +4,7 @@ import AppNav from "./AppNav";
 
 const AppHeader: FunctionComponent = function ({}) {
   return (
-    <header className="h-8 flex items-center justify-center">
+    <header className="px-8 py-2 flex items-center justify-center">
       {/*<AppNav/>*/}
     </header>
   );

@@ -23,7 +23,7 @@ const NavLink: FunctionComponent<NavLinkProps> = function ({ children, href }) {
     <Link href={href}>
       <a className={linkClass}>
         <SvgBrush className={styles.brush} />
-        <div>{children}</div>
+        <div className="type-display text-xl">{children}</div>
       </a>
     </Link>
   );

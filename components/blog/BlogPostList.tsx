@@ -14,7 +14,7 @@ const BlogPostListItem: FunctionComponent<BlogPostListItemProps> = function ({
   return (
     <Link href={`/blog/${post.slug}`}>
       <a>
-        <h3 className="text-accent text-lg">{post.title}</h3>
+        <h3 className="type-display text-xl text-accent text-lg">{post.title}</h3>
         <MetaInfo className="text-xs" post={post} />
         <div className="text-sm truncate">{post.content}</div>
       </a>
@@ -30,7 +30,7 @@ const BlogPostList: FunctionComponent<BlogPostListProps> = function ({
   posts,
 }) {
   return (
-    <div className="flex flex-col max-w-sm mx-auto space-y-8">
+    <div className="flex flex-col p-1 max-w-md mx-auto space-y-8">
       {posts.map((post, index) => {
         return <BlogPostListItem key={index} post={post} />;
       })}

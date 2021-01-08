@@ -4,7 +4,7 @@ import SocialLinks from "./SocialLinks";
 
 const AppFooter: FunctionComponent = function ({}) {
   return (
-    <footer className="flex items-center justify-center">
+    <footer className="px-8 py-2 flex items-center justify-center">
       <SocialLinks />
     </footer>
   );
