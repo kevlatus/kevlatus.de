@@ -44,7 +44,7 @@ highlight that it still has a rectangular shape, as all widgets in Flutter do. I
 will see later, it might complicate positioning, when adding indicators to our wheel.
 
 <div align="center">
-  <img src="/assets/blog/images/img-circle-slice.png">
+  <img src="https://raw.githubusercontent.com/kevlatus/kevlatus.de/main/public/assets/blog/images/img-circle-slice.png">
 </div>
 
 ```dart
@@ -123,7 +123,7 @@ slice's box, as can be seen by the example of drawing a single slice. Therefore,
 to `Alignment.topLeft`.
 
 <div align="center">
-  <img src="/assets/blog/images/img-circle.png">
+  <img src="https://raw.githubusercontent.com/kevlatus/kevlatus.de/main/public/assets/blog/images/img-circle.png">
 </div>
 
 Great! We are now able to draw a circle composed of any number of individually customizable slices. In my next article
