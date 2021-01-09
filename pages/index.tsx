@@ -20,9 +20,9 @@ const Home: FunctionComponent = function () {
                 life.
               </p>
 
-              {/* <button className="rounded-md border-primary border-2 px-2 text-primary self-center">
-								see how
-							</button> */}
+              {/*<button className="type-display rounded-md border-primary border-2 px-2 text-primary self-center">*/}
+              {/*  see how*/}
+              {/*</button>*/}
             </article>
           </section>
         </main>

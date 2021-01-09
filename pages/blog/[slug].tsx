@@ -25,7 +25,7 @@ const BlogPostPage: FunctionComponent<BlogPostPageProps> = function ({ post }) {
   );
   return (
     <>
-      <DocHead />
+      <DocHead path={`/blog/${post.slug}`} />
 
       <AppLayout>
         <main className="flex-grow px-2 py-4">

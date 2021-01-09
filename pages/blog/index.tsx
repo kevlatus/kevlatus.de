@@ -13,7 +13,7 @@ interface BlogPageProps {
 const BlogPage: FunctionComponent<BlogPageProps> = function ({ posts }) {
   return (
     <>
-      <DocHead />
+      <DocHead path="/blog" />
 
       <AppLayout className="bg-primary-o2">
         <main className="flex-grow p-4">
