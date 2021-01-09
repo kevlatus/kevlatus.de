@@ -1,14 +1,15 @@
-Do you know that feeling when you just can't find a suitable package for your use case? I recently encountered it when
-implementing a wheel of fortune in Flutter. So I decided to dive deep into Flutter and build one myself. This is the
-story of creating a fortune wheel, like the one shown below, using CustomPainter, CustomClipper, animations and more.
+Have you ever been frustrated not finding a suitable package? Recently I encountered this feeling while looking for a
+wheel of fortune in Flutter. So I decided to dive deep into Flutter and build one myself. What follows is the story of
+creating a fortune wheel, like the one shown below, using CustomPainter, LayoutDelegate, animations and more. It is the
+first part of a bite-sized series on the details of [this package](https://pub.dev/packages/flutter_fortune_wheel).
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/kevlatus/flutter_fortune_wheel/main/images/img-wheel-256.png">
 </div>
 
-The following implementation is composed of individual Flutter widgets instead of using
+My main objective was to create an implementation, which is composed of individual Flutter widgets instead of using
 images, [as other solutions do](https://pub.dev/packages/flutter_spinning_wheel). This allows for making best use of hot
-reloading and does not require additional tools for creating suitable images. Furthermore, each _slice_ within the wheel
+reloading and does not require additional tools for creating suitable images. Furthermore, each slice within the wheel
 should allow for individual styling as well as hosting arbitrary child widgets. Finally, the wheel must spin before
 showing a selected value to be a real wheel of fortune, which we will achieve using a Bezier-curved animation.
 
@@ -39,7 +40,8 @@ The code above draws three simple lines:
 3. a straight line from the bottom left corner back to the top left origin
 
 Drawing this path using a CustomPainter is shown in the picture below. I added a border to the surrounding widget to
-highlight that it still has a rectangular shape, as all widgets in Flutter do.
+highlight that it still has a rectangular shape, as all widgets in Flutter do. In general, this is no issue, but as we
+will see later, it might complicate positioning, when adding indicators to our wheel.
 
 <div align="center">
   <img src="/assets/blog/images/img-circle-slice.png">
@@ -125,11 +127,11 @@ to `Alignment.topLeft`.
 </div>
 
 Great! We are now able to draw a circle composed of any number of individually customizable slices. In my next article
-we will implement a LayoutDelegate to correctly position child widgets within the slices. If you just want to get
-started using the final widget instead, you can find it ready to use
-on [pub.dev](https://pub.dev/packages/flutter_fortune_wheel).
+we will implement a MultiChildLayoutDelegate to correctly position child widgets within the slices. In the meantime, if
+you don't want to wait for the next article, you can find the package's
+code [on Github](https://github.com/kevlatus/flutter_fortune_wheel).
 
-## Further reading
+### Further reading
 
 - [CustomPainter](https://api.flutter.dev/flutter/rendering/CustomPainter-class.html) Flutter docs
 - [my inspiration](https://github.com/baobao1996mn/flutter-fortune-wheel) for using a path based approach

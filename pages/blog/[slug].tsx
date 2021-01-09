@@ -30,7 +30,7 @@ const BlogPostPage: FunctionComponent<BlogPostPageProps> = function ({ post }) {
       <AppLayout>
         <main className="flex-grow px-2 py-4">
           <article className={contentClass}>
-            <h1 className={styles.h1}>{post.title}</h1>
+            <h2 className={styles.heading}>{post.title}</h2>
             <MetaInfo post={post} className={styles.meta} />
             <Markdown className={contentClass} markdown={post.content} />
           </article>
