@@ -79,6 +79,15 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({ path = "/" }) {
         as="style"
       />
       <link rel="stylesheet" href="https://use.typekit.net/xhs5wzt.css" />
+
+      {process.env.NODE_ENV === "production" ? (
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "var _paq=window._paq=window._paq||[];_paq.push(['disableCookies']),_paq.push(['trackPageView']),_paq.push(['enableLinkTracking']),function(){_paq.push(['setTrackerUrl','https://kevlatus.matomo.cloud/matomo.php']),_paq.push(['setSiteId','1']);var a=document,e=a.createElement('script'),t=a.getElementsByTagName('script')[0];e.type='text/javascript',e.async=!0,e.src='//cdn.matomo.cloud/kevlatus.matomo.cloud/matomo.js',t.parentNode.insertBefore(e,t)}();",
+          }}
+        />
+      ) : null}
     </Head>
   );
 };
