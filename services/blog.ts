@@ -28,6 +28,20 @@ async function fetchBlogPostList(): Promise<BlogPostList> {
   return JSON.parse(content.toString());
 }
 
+function sortBlogPosts(posts: BlogPost[]): BlogPost[] {
+  function compare(a: BlogPost, b: BlogPost): number {
+    if (a.timestamp > b.timestamp) {
+      return -1;
+    }
+    if (a.timestamp < b.timestamp) {
+      return 1;
+    }
+    return 0;
+  }
+
+  return [...posts].sort(compare);
+}
+
 export async function fetchBlogPostBySlug(slug: string): Promise<BlogPost> {
   const postList = await fetchBlogPostList();
   const matchingDef = postList.posts.find((d) => d.slug === slug);
@@ -44,5 +58,6 @@ export async function fetchBlogPosts(): Promise<BlogPost[]> {
   for (const post of defs.posts) {
     ret.push(await fillContent(post));
   }
-  return ret;
+
+  return sortBlogPosts(ret);
 }
