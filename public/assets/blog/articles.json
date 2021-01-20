@@ -3,8 +3,14 @@
     {
       "slug": "making-of-flutter-fortune-wheel",
       "title": "Making-of: Flutter Fortune Wheel",
-      "content": "/assets/blog/articles/making-of-flutter-fortune-wheel.md",
-      "timestamp": "2021-01-08T14:15:59.376Z"
+      "content": "/assets/blog/articles/1-making-of-flutter-fortune-wheel.md",
+      "timestamp": "2021-01-09T00:00:00.000Z"
+    },
+    {
+      "slug": "how-to-build-advanced-layouts-in-flutter",
+      "title": "How to implement advanced layouts in Flutter",
+      "content": "/assets/blog/articles/2-how-to-build-advanced-layouts-in-flutter.md",
+      "timestamp": "2021-01-20T22:00:00.000Z"
     }
   ]
 }
