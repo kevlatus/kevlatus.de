@@ -36,3 +36,7 @@
 .meta {
   font-size: 0.7em !important;
 }
+
+.article img {
+  margin: 0 auto;
+}
