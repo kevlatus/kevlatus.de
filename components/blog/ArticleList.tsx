@@ -14,9 +14,7 @@ const ArticleListItem: FunctionComponent<ArticleListItemProps> = function ({
   return (
     <Link href={`/blog/${article.slug}`}>
       <a>
-        <h3 className="type-display text-xl text-accent text-lg">
-          {article.title}
-        </h3>
+        <h3 className="type-display text-xl text-accent">{article.title}</h3>
         <MetaInfo className="text-xs" article={article} />
         <div className="text-sm truncate">{article.content}</div>
       </a>
