@@ -1,0 +1,45 @@
+name: Release
+on:
+  push:
+    branches:
+      - releases/v2
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      
+      - run: install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r tools/article-fetcher/requirements.txt
+      
+      # requires NOTION_TOKEN env var
+      # can be retrieved from Notion cookie token_v2 in DevTools
+      - name: fetch articles from Notion
+        run: python tools/article-fetcher/main.py
+
+      - run: npm install
+
+      - name: build app
+        run: npm run build
+
+      - name: export app
+        run: npm run export
+
+      - name: copy netlify config
+        run: cp netlify.toml out/
+
+      - name: Publish
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=out --prod
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
