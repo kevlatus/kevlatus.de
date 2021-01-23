@@ -24,6 +24,8 @@ jobs:
       # can be retrieved from Notion cookie token_v2 in DevTools
       - name: fetch articles from Notion
         run: python tools/article-fetcher/main.py
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
 
       - run: npm install
 
