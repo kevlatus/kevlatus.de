@@ -19,7 +19,7 @@ async function fillContent(def: Article): Promise<Article> {
 }
 
 async function fetchArticleContent(path: string): Promise<string> {
-  const content = await fs.readFile(`./public/${path}`);
+  const content = await fs.readFile(`${path}`);
   return content.toString();
 }
 
