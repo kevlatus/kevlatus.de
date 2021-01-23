@@ -1,9 +1,9 @@
 {
-  "posts": [
+  "articles": [
     {
       "slug": "making-of-flutter-fortune-wheel",
       "title": "Making-of: Flutter Fortune Wheel",
-      "content": "/assets/blog/articles/1-making-of-flutter-fortune-wheel.md",
+      "content": "\\assets\\blog\\articles\\1-making-of-flutter-fortune-wheel.md",
       "timestamp": "2021-01-09T00:00:00.000Z"
     },
     {

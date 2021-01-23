@@ -3,21 +3,21 @@ import React, { FunctionComponent } from "react";
 
 import AppLayout from "../../components/AppLayout";
 import DocHead from "../../components/DocHead";
-import BlogPostList from "../../components/blog/BlogPostList";
-import { BlogPost, fetchBlogPosts } from "../../services/blog";
+import ArticleList from "../../components/blog/ArticleList";
+import { Article, fetchArticles } from "../../services/blog";
 
 interface BlogPageProps {
-  readonly posts: BlogPost[];
+  readonly articles: Article[];
 }
 
-const BlogPage: FunctionComponent<BlogPageProps> = function ({ posts }) {
+const BlogPage: FunctionComponent<BlogPageProps> = function ({ articles }) {
   return (
     <>
       <DocHead path="/blog" />
 
       <AppLayout className="bg-primary-o2">
         <main className="flex-grow p-4">
-          <BlogPostList posts={posts} />
+          <ArticleList articles={articles} />
         </main>
       </AppLayout>
     </>
@@ -27,7 +27,7 @@ const BlogPage: FunctionComponent<BlogPageProps> = function ({ posts }) {
 export const getStaticProps: GetStaticProps<BlogPageProps> = async () => {
   return {
     props: {
-      posts: await fetchBlogPosts(),
+      articles: await fetchArticles(),
     },
   };
 };

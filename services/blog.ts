@@ -1,35 +1,35 @@
 import { promises as fs } from "fs";
 
-interface BlogPostList {
-  readonly posts: BlogPost[];
+interface ArticleList {
+  readonly articles: Article[];
 }
 
-export interface BlogPost {
+export interface Article {
   readonly title: string;
   readonly content: string;
   readonly slug: string;
   readonly timestamp: string;
 }
 
-async function fillContent(def: BlogPost): Promise<BlogPost> {
+async function fillContent(def: Article): Promise<Article> {
   return {
     ...def,
-    content: await fetchBlogPostContent(def.content),
+    content: await fetchArticleContent(def.content),
   };
 }
 
-async function fetchBlogPostContent(path: string): Promise<string> {
+async function fetchArticleContent(path: string): Promise<string> {
   const content = await fs.readFile(`./public/${path}`);
   return content.toString();
 }
 
-async function fetchBlogPostList(): Promise<BlogPostList> {
+async function fetchArticleList(): Promise<ArticleList> {
   const content = await fs.readFile("./public/assets/blog/articles.json");
   return JSON.parse(content.toString());
 }
 
-function sortBlogPosts(posts: BlogPost[]): BlogPost[] {
-  function compare(a: BlogPost, b: BlogPost): number {
+function sortArticles(articles: Article[]): Article[] {
+  function compare(a: Article, b: Article): number {
     if (a.timestamp > b.timestamp) {
       return -1;
     }
@@ -39,12 +39,12 @@ function sortBlogPosts(posts: BlogPost[]): BlogPost[] {
     return 0;
   }
 
-  return [...posts].sort(compare);
+  return [...articles].sort(compare);
 }
 
-export async function fetchBlogPostBySlug(slug: string): Promise<BlogPost> {
-  const postList = await fetchBlogPostList();
-  const matchingDef = postList.posts.find((d) => d.slug === slug);
+export async function fetchArticlesBySlug(slug: string): Promise<Article> {
+  const articleList = await fetchArticleList();
+  const matchingDef = articleList.articles.find((d) => d.slug === slug);
   if (matchingDef == null) {
     return null;
   } else {
@@ -52,12 +52,12 @@ export async function fetchBlogPostBySlug(slug: string): Promise<BlogPost> {
   }
 }
 
-export async function fetchBlogPosts(): Promise<BlogPost[]> {
-  const defs = await fetchBlogPostList();
-  const ret: BlogPost[] = [];
-  for (const post of defs.posts) {
-    ret.push(await fillContent(post));
+export async function fetchArticles(): Promise<Article[]> {
+  const defs = await fetchArticleList();
+  const ret: Article[] = [];
+  for (const article of defs.articles) {
+    ret.push(await fillContent(article));
   }
 
-  return sortBlogPosts(ret);
+  return sortArticles(ret);
 }

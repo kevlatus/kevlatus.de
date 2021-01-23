@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { BlogPost } from "../../services/blog";
+import { Article } from "../../services/blog";
 
 function computeReadingTime(text: string): number {
   text = text.replace(/[^a-zA-Z0-9.!?:;\-()\s]/g, "");
@@ -11,14 +11,14 @@ function computeReadingTime(text: string): number {
 
 interface MetaInfoProps {
   readonly className?: string;
-  readonly post: BlogPost;
+  readonly article: Article;
 }
 
 const MetaInfo: FunctionComponent<MetaInfoProps> = function ({
   className,
-  post,
+  article,
 }) {
-  const date = new Date(Date.parse(post.timestamp));
+  const date = new Date(Date.parse(article.timestamp));
   const day = date.getDate().toString().padStart(2, "0");
   const month = [
     "January",
@@ -36,7 +36,7 @@ const MetaInfo: FunctionComponent<MetaInfoProps> = function ({
   ][date.getMonth()];
   const year = date.getFullYear();
 
-  const readingTime = computeReadingTime(post.content);
+  const readingTime = computeReadingTime(article.content);
 
   return (
     <div

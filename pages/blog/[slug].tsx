@@ -3,36 +3,38 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { FunctionComponent } from "react";
 
 import {
-  BlogPost,
-  fetchBlogPostBySlug,
-  fetchBlogPosts,
+  Article,
+  fetchArticlesBySlug,
+  fetchArticles,
 } from "../../services/blog";
 import DocHead from "../../components/DocHead";
 import AppLayout from "../../components/AppLayout";
 import Markdown from "../../components/Markdown";
 import MetaInfo from "../../components/blog/MetaInfo";
 
-import styles from "../../styles/BlogPostPage.module.css";
+import styles from "../../styles/ArticlePage.module.css";
 
-interface BlogPostPageProps {
-  readonly post: BlogPost;
+interface ArticlePageProps {
+  readonly article: Article;
 }
 
-const BlogPostPage: FunctionComponent<BlogPostPageProps> = function ({ post }) {
+const ArticlePage: FunctionComponent<ArticlePageProps> = function ({
+  article,
+}) {
   const contentClass = classNames(
     "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto",
     styles.article
   );
   return (
     <>
-      <DocHead path={`/blog/${post.slug}`} />
+      <DocHead path={`/blog/${article.slug}`} />
 
       <AppLayout>
         <main className="flex-grow px-2 py-4">
           <article className={contentClass}>
-            <h2 className={styles.heading}>{post.title}</h2>
-            <MetaInfo post={post} className={styles.meta} />
-            <Markdown className={contentClass} markdown={post.content} />
+            <h2 className={styles.heading}>{article.title}</h2>
+            <MetaInfo article={article} className={styles.meta} />
+            <Markdown className={contentClass} markdown={article.content} />
           </article>
         </main>
       </AppLayout>
@@ -40,24 +42,22 @@ const BlogPostPage: FunctionComponent<BlogPostPageProps> = function ({ post }) {
   );
 };
 
-export const getStaticProps: GetStaticProps<BlogPostPageProps> = async (
-  ctx
-) => {
+export const getStaticProps: GetStaticProps<ArticlePageProps> = async (ctx) => {
   const slug = ctx.params.slug as string;
   return {
     props: {
-      post: await fetchBlogPostBySlug(slug),
+      article: await fetchArticlesBySlug(slug),
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await fetchBlogPosts();
-  const paths = posts.map((p) => ({ params: { slug: p.slug } }));
+  const articles = await fetchArticles();
+  const paths = articles.map((p) => ({ params: { slug: p.slug } }));
   return {
     paths,
     fallback: false,
   };
 };
 
-export default BlogPostPage;
+export default ArticlePage;
