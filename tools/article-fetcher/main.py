@@ -69,7 +69,7 @@ def convert_block_to_markdown(
         return prefix + cases[type(block)](block)
     else:
         print("cannot convert block type " + str(type(block)))
-        return ""
+        return None
 
 
 def fetch_article_markdown(client: NotionClient, id: str) -> str:
@@ -78,7 +78,7 @@ def fetch_article_markdown(client: NotionClient, id: str) -> str:
     converted_blocks = [
         convert_block_to_markdown(pair[0], pair[1]) for pair in block_pairs
     ]
-    return "\n".join(converted_blocks)
+    return "\n".join([b for b in converted_blocks if b is not None])
 
 
 def split_article_content(markdown: str) -> Tuple[str, str]:
@@ -94,35 +94,54 @@ class Article(object):
     slug: str
     content: str
     title: str
+    status: str
 
-    def __init__(self, id: str, title: str, content: str, timestamp: str) -> None:
+    def __init__(
+        self,
+        id: str,
+        title: str,
+        content: str,
+        timestamp: str,
+        status: str,
+    ) -> None:
         super().__init__()
         self.id = id
         self.timestamp = timestamp
         self.title = title
         self.content = content
         self.slug = slugify(title)
+        self.status = status
 
-    def get_content_path(self) -> str:
+    @property
+    def content_path(self):
         return path.join(DIR_ARTICLES, "{}.md".format(self.slug))
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "content": self.get_content_path(),
+            "content": self.content_path,
             "slug": self.slug,
-            "timestamp": self.timestamp.isoformat(),
+            "timestamp": self.timestamp.isoformat()
+            if self.timestamp is not None
+            else None,
             "title": self.title,
+            "status": self.status,
         }
 
     @staticmethod
     def from_notion_row(client: NotionClient, row: CollectionRowBlock) -> Article:
         markdown = fetch_article_markdown(client, row.id)
         title, content = split_article_content(markdown)
+        timestamp = (
+            row.get_property("Release Date").start
+            if row.get_property("Release Date") is not None
+            else None
+        )
         return Article(
             id=row.id,
             title=title,
             content=content,
-            timestamp=row.get_property("Release Date").start,
+            timestamp=timestamp,
+            status=row.Status,
         )
 
 
@@ -137,10 +156,12 @@ def fetch_articles(client: NotionClient) -> List[Article]:
     blog_pipeline = client.get_collection_view(
         "https://www.notion.so/165caedb0c704c538f4734687b6d10e6?v=03bee239ca704373b3cb2fb63d80271f"
     )
-    final_rows = [
-        row for row in blog_pipeline.collection.get_rows() if row.Status == "4 final"
+    rows = [
+        row
+        for row in blog_pipeline.collection.get_rows()
+        if row.Status in ["1 draft", "2 final"]
     ]
-    return [Article.from_notion_row(client, row) for row in final_rows]
+    return [Article.from_notion_row(client, row) for row in rows]
 
 
 notion_client = NotionClient(token_v2=environ.get("NOTION_TOKEN"))

@@ -4,7 +4,7 @@ import React, { FunctionComponent } from "react";
 import AppLayout from "../../components/AppLayout";
 import DocHead from "../../components/DocHead";
 import ArticleList from "../../components/blog/ArticleList";
-import { Article, fetchArticles } from "../../services/blog";
+import { Article, ArticleStatus, fetchArticles } from "../../services/blog";
 
 interface BlogPageProps {
   readonly articles: Article[];
@@ -25,9 +25,11 @@ const BlogPage: FunctionComponent<BlogPageProps> = function ({ articles }) {
 };
 
 export const getStaticProps: GetStaticProps<BlogPageProps> = async () => {
+  let articles = await fetchArticles();
+  articles = articles.filter((a) => a.status == ArticleStatus.Final);
   return {
     props: {
-      articles: await fetchArticles(),
+      articles,
     },
   };
 };
