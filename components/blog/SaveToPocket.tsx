@@ -13,7 +13,7 @@ const SaveToPocket: FunctionComponent<SaveToPocketProps> = function ({
     articleUrl
   )}`;
   return (
-    <a className={className} href={href}>
+    <a className={className} href={href} target="_blank">
       Save to Pocket
     </a>
   );
