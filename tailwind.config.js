@@ -46,7 +46,7 @@ module.exports = {
               color: "var(--color-text)",
             },
             a: {
-              color: "var(--color-accent)",
+              color: "var(--color-primary)",
             },
             "ol > li::before": {
               color: "var(--color-primary)",
