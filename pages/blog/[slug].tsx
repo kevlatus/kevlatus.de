@@ -13,6 +13,7 @@ import Markdown from "../../components/Markdown";
 import ArticleMetaInfo from "../../components/blog/MetaInfo";
 
 import styles from "../../styles/ArticlePage.module.css";
+import SaveToPocket from "../../components/blog/SaveToPocket";
 
 interface ArticlePageProps {
   readonly article: Article;
@@ -38,7 +39,14 @@ const ArticlePage: FunctionComponent<ArticlePageProps> = function ({
         <main className="flex-grow px-2 py-4">
           <article className={contentClass}>
             <h2 className={styles.heading}>{article.title}</h2>
-            <ArticleMetaInfo article={article} className={styles.meta} />
+            <div className="flex">
+              <ArticleMetaInfo article={article} className="text-xs" />
+              <div className="flex-grow" />
+              <SaveToPocket
+                className="text-xs"
+                articleUrl={`https://www.kevlatus.de/blog/${article.slug}`}
+              />
+            </div>
             <Markdown className={contentClass} markdown={article.content} />
           </article>
         </main>
