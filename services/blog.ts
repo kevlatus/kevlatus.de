@@ -16,6 +16,7 @@ export interface Article {
   readonly slug: string;
   readonly timestamp: string;
   readonly status: ArticleStatus;
+  readonly description: string;
 }
 
 async function fillContent(def: Article): Promise<Article> {

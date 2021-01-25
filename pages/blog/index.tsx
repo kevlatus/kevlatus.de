@@ -2,7 +2,7 @@ import { GetStaticProps } from "next";
 import React, { FunctionComponent } from "react";
 
 import AppLayout from "../../components/AppLayout";
-import DocHead from "../../components/DocHead";
+import DocHead, { defaultDescription } from "../../components/DocHead";
 import ArticleList from "../../components/blog/ArticleList";
 import { Article, ArticleStatus, fetchArticles } from "../../services/blog";
 
@@ -13,7 +13,12 @@ interface BlogPageProps {
 const BlogPage: FunctionComponent<BlogPageProps> = function ({ articles }) {
   return (
     <>
-      <DocHead path="/blog" />
+      <DocHead
+        path="/blog"
+        title="Blog"
+        concatTitle={true}
+        description={defaultDescription}
+      />
 
       <AppLayout className="bg-primary-o2">
         <main className="flex-grow p-4">

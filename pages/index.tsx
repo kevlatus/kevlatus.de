@@ -1,12 +1,20 @@
 import React, { FunctionComponent } from "react";
 
 import AppLayout from "../components/AppLayout";
-import DocHead from "../components/DocHead";
+import DocHead, {
+  defaultDescription,
+  defaultPath,
+  defaultTitle,
+} from "../components/DocHead";
 
 const Home: FunctionComponent = function () {
   return (
     <>
-      <DocHead />
+      <DocHead
+        path={defaultPath}
+        title={defaultTitle}
+        description={defaultDescription}
+      />
 
       <AppLayout className="bg-primary-o2">
         <main className="flex-grow flex flex-col justify-center">

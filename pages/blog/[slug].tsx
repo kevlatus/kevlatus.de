@@ -4,10 +4,10 @@ import { FunctionComponent } from "react";
 
 import {
   Article,
-  fetchArticlesBySlug,
   fetchArticles,
+  fetchArticlesBySlug,
 } from "../../services/blog";
-import DocHead from "../../components/DocHead";
+import DocHead, { PageType } from "../../components/DocHead";
 import AppLayout from "../../components/AppLayout";
 import Markdown from "../../components/Markdown";
 import MetaInfo from "../../components/blog/MetaInfo";
@@ -27,7 +27,12 @@ const ArticlePage: FunctionComponent<ArticlePageProps> = function ({
   );
   return (
     <>
-      <DocHead path={`/blog/${article.slug}`} />
+      <DocHead
+        path={`/blog/${article.slug}`}
+        title={article.title}
+        description={article.description}
+        pageType={PageType.Article}
+      />
 
       <AppLayout>
         <main className="flex-grow px-2 py-4">
