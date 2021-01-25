@@ -1,13 +1,14 @@
 import { FunctionComponent } from "react";
 import ReactMarkdown from "react-markdown/with-html";
-import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
-import css from 'react-syntax-highlighter/dist/cjs/languages/hljs/css';
-import dart from 'react-syntax-highlighter/dist/cjs/languages/hljs/dart';
-import ts from 'react-syntax-highlighter/dist/cjs/languages/hljs/typescript';
+import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter";
+import css from "react-syntax-highlighter/dist/cjs/languages/hljs/css";
+import dart from "react-syntax-highlighter/dist/cjs/languages/hljs/dart";
+import ts from "react-syntax-highlighter/dist/cjs/languages/hljs/typescript";
+import gfm from "remark-gfm";
 
-SyntaxHighlighter.registerLanguage('css', css);
-SyntaxHighlighter.registerLanguage('dart', dart);
-SyntaxHighlighter.registerLanguage('typescript', ts);
+SyntaxHighlighter.registerLanguage("css", css);
+SyntaxHighlighter.registerLanguage("dart", dart);
+SyntaxHighlighter.registerLanguage("typescript", ts);
 
 const customHighlightStyle = {
   hljs: {
@@ -127,7 +128,14 @@ interface MarkdownProps {
 }
 
 const Markdown: FunctionComponent<MarkdownProps> = function ({ markdown }) {
-  return <ReactMarkdown renderers={renderers} children={markdown} allowDangerousHtml />;
+  return (
+    <ReactMarkdown
+      renderers={renderers}
+      children={markdown}
+      plugins={[gfm]}
+      allowDangerousHtml
+    />
+  );
 };
 
 export default Markdown;
