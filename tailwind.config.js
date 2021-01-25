@@ -16,6 +16,9 @@ module.exports = {
           DEFAULT: "var(--color-text)",
           primary: "var(--color-text-primary)",
         },
+        background: {
+          DEFAULT: "var(--color-background)",
+        },
       },
       typography: {
         DEFAULT: {
@@ -43,7 +46,7 @@ module.exports = {
               color: "var(--color-text)",
             },
             a: {
-              color: "var(--color-accent)",
+              color: "var(--color-primary)",
             },
             "ol > li::before": {
               color: "var(--color-primary)",

@@ -1,14 +1,41 @@
 import Head from "next/head";
 import { FunctionComponent } from "react";
 
-interface DocHeadProps {
-  readonly path?: string;
+export const defaultTitle = "Kevin Latusinski";
+export const defaultDescription = "Personal page and blog by Kevin Latusinski.";
+export const defaultPath = "/";
+
+export enum PageType {
+  Article = "article",
+  Website = "website",
 }
 
-const DocHead: FunctionComponent<DocHeadProps> = function ({ path = "/" }) {
-  const title = "Kevin Latusinski";
-  const description = "Personal page and blog by Kevin Latusinski.";
-  const url = "https://www.kevlatus.de" + path;
+interface DocHeadProps {
+  readonly path: string;
+  readonly concatTitle?: boolean;
+  readonly title: string;
+  readonly description: string;
+  readonly pageType?: PageType;
+}
+
+const DocHead: FunctionComponent<DocHeadProps> = function ({
+  concatTitle,
+  description,
+  path,
+  title,
+  pageType = PageType.Website,
+}) {
+  const url = "https://www.kevlatus.de" + (path ?? defaultPath);
+
+  if (title == null) {
+    title = defaultTitle;
+  } else {
+    title = concatTitle ? `${title} | ${defaultTitle}` : title;
+  }
+
+  if (description == null) {
+    description = defaultDescription;
+  }
 
   return (
     <Head>
@@ -64,14 +91,22 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({ path = "/" }) {
       />
 
       <meta name="theme-color" content="#3786E9" />
+
+      <meta property="author" content="Kevin Latusinski" />
       <meta name="description" content={description} />
+      <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={pageType} />
+      {/*<meta property="og:image" content="" />*/}
+      {/*<meta property="og:image:width" content="" />*/}
+      {/*<meta property="og:image:height" content="" />*/}
+      <meta name="twitter:card" content="summary" />
       <meta name="twitter:creator" content="@kevlatus" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
+      <meta name="twitter:url" content={url} />
+      {/*<meta property="twitter:image" content="" />*/}
 
       <link
         rel="preload"

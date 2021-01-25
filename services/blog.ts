@@ -4,11 +4,19 @@ interface ArticleList {
   readonly articles: Article[];
 }
 
+export enum ArticleStatus {
+  Idea = "0 idea",
+  Draft = "1 draft",
+  Final = "2 final",
+}
+
 export interface Article {
   readonly title: string;
   readonly content: string;
   readonly slug: string;
   readonly timestamp: string;
+  readonly status: ArticleStatus;
+  readonly description: string;
 }
 
 async function fillContent(def: Article): Promise<Article> {
