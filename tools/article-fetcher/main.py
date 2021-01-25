@@ -6,7 +6,7 @@ import notion.block
 from notion.client import NotionClient
 from notion.collection import CollectionRowBlock, CollectionView
 import numpy as np
-from os import environ, path
+from os import environ, makedirs, path
 from slugify import slugify
 from typing import Any, Dict, List, Tuple
 
@@ -251,6 +251,7 @@ def fetch_articles(client: NotionClient) -> List[Article]:
 notion_client = NotionClient(token_v2=environ.get("NOTION_TOKEN"))
 
 articles = fetch_articles(notion_client)
+makedirs(DIR_ARTICLES)
 for article in articles:
     write_article_file(article)
 
