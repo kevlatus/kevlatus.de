@@ -10,7 +10,7 @@ import {
 import DocHead, { PageType } from "../../components/DocHead";
 import AppLayout from "../../components/AppLayout";
 import Markdown from "../../components/Markdown";
-import MetaInfo from "../../components/blog/MetaInfo";
+import ArticleMetaInfo from "../../components/blog/MetaInfo";
 
 import styles from "../../styles/ArticlePage.module.css";
 
@@ -38,7 +38,7 @@ const ArticlePage: FunctionComponent<ArticlePageProps> = function ({
         <main className="flex-grow px-2 py-4">
           <article className={contentClass}>
             <h2 className={styles.heading}>{article.title}</h2>
-            <MetaInfo article={article} className={styles.meta} />
+            <ArticleMetaInfo article={article} className={styles.meta} />
             <Markdown className={contentClass} markdown={article.content} />
           </article>
         </main>

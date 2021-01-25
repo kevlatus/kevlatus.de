@@ -16,6 +16,9 @@ module.exports = {
           DEFAULT: "var(--color-text)",
           primary: "var(--color-text-primary)",
         },
+        background: {
+          DEFAULT: "var(--color-background)",
+        },
       },
       typography: {
         DEFAULT: {

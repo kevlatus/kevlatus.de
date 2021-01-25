@@ -14,7 +14,15 @@ interface MetaInfoProps {
   readonly article: Article;
 }
 
-const MetaInfo: FunctionComponent<MetaInfoProps> = function ({
+export const ArticleReadingTime: FunctionComponent<MetaInfoProps> = function ({
+  className,
+  article,
+}) {
+  const readingTime = computeReadingTime(article.content);
+  return <span className={className}>~{readingTime} min read</span>;
+};
+
+export const ArticleTimestamp: FunctionComponent<MetaInfoProps> = function ({
   className,
   article,
 }) {
@@ -35,14 +43,24 @@ const MetaInfo: FunctionComponent<MetaInfoProps> = function ({
     "December",
   ][date.getMonth()];
   const year = date.getFullYear();
-
-  const readingTime = computeReadingTime(article.content);
-
   return (
-    <div
-      className={className}
-    >{`${day} ${month} ${year} | ~${readingTime} min read`}</div>
+    <span className={className}>
+      {day} {month} {year}
+    </span>
   );
 };
 
-export default MetaInfo;
+const ArticleMetaInfo: FunctionComponent<MetaInfoProps> = function ({
+  className,
+  article,
+}) {
+  return (
+    <div className={className}>
+      <ArticleTimestamp article={article} />
+      <span> | </span>
+      <ArticleReadingTime article={article} />
+    </div>
+  );
+};
+
+export default ArticleMetaInfo;
