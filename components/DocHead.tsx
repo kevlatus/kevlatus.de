@@ -5,6 +5,10 @@ export const defaultTitle = "Kevin Latusinski";
 export const defaultDescription = "Personal page and blog by Kevin Latusinski.";
 export const defaultPath = "/";
 
+export function buildPageUrl(path: string): string {
+  return "https://www.kevlatus.de" + (path ?? defaultPath);
+}
+
 export enum PageType {
   Article = "article",
   Website = "website",
@@ -25,7 +29,7 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({
   title,
   pageType = PageType.Website,
 }) {
-  const url = "https://www.kevlatus.de" + (path ?? defaultPath);
+  const url = buildPageUrl(path);
 
   if (title == null) {
     title = defaultTitle;
@@ -106,7 +110,10 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:url" content={url} />
-      {/*<meta property="twitter:image" content="" />*/}
+      <meta
+        property="twitter:image"
+        content="https://raw.githubusercontent.com/kevlatus/kevlatus.de/main/public/assets/images/ic-kevlatus-circle-512.png"
+      />
 
       <link
         rel="preload"
