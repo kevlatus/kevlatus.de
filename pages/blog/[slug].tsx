@@ -7,13 +7,14 @@ import {
   fetchArticles,
   fetchArticlesBySlug,
 } from "../../services/blog";
-import DocHead, { PageType } from "../../components/DocHead";
+import DocHead, { buildPageUrl, PageType } from "../../components/DocHead";
 import AppLayout from "../../components/AppLayout";
 import Markdown from "../../components/Markdown";
 import ArticleMetaInfo from "../../components/blog/MetaInfo";
 
 import styles from "../../styles/ArticlePage.module.css";
 import SaveToPocket from "../../components/blog/SaveToPocket";
+import JoinDiscussionButton from "../../components/blog/JoinDiscussionButton";
 
 interface ArticlePageProps {
   readonly article: Article;
@@ -26,10 +27,12 @@ const ArticlePage: FunctionComponent<ArticlePageProps> = function ({
     "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto",
     styles.article
   );
+  const path = `/blog/${article.slug}`;
+
   return (
     <>
       <DocHead
-        path={`/blog/${article.slug}`}
+        path={path}
         title={article.title}
         description={article.description}
         pageType={PageType.Article}
@@ -48,6 +51,12 @@ const ArticlePage: FunctionComponent<ArticlePageProps> = function ({
               />
             </div>
             <Markdown className={contentClass} markdown={article.content} />
+
+            <div className="flex">
+              <div className="flex-grow" />
+              <JoinDiscussionButton url={buildPageUrl(path)} />
+              <div className="flex-grow" />
+            </div>
           </article>
         </main>
       </AppLayout>
