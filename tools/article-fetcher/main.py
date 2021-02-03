@@ -180,6 +180,7 @@ class Article(object):
     content: str
     title: str
     status: str
+    description: str
 
     def __init__(
         self,
@@ -188,6 +189,7 @@ class Article(object):
         content: str,
         timestamp: str,
         status: str,
+        description: str,
     ) -> None:
         super().__init__()
         self.id = id
@@ -196,6 +198,7 @@ class Article(object):
         self.content = content
         self.slug = slugify(title)
         self.status = status
+        self.description = description
 
     @property
     def content_path(self):
@@ -210,12 +213,14 @@ class Article(object):
             else None,
             "title": self.title,
             "status": self.status,
+            "description": self.description,
         }
 
     @staticmethod
     def from_notion_row(client: NotionClient, row: CollectionRowBlock) -> Article:
         markdown = fetch_article_markdown(client, row.id)
         title, content = split_article_content(markdown)
+        description = content[:60] + "..."
         timestamp = (
             row.get_property("Release Date").start
             if row.get_property("Release Date") is not None
@@ -227,6 +232,7 @@ class Article(object):
             content=content,
             timestamp=timestamp,
             status=row.Status,
+            description=description,
         )
 
 
