@@ -1,8 +1,5 @@
-from __future__ import annotations
 from datetime import datetime
 import glob
-import json
-from os.path import join
 import re
 from typing import List
 
@@ -12,11 +9,15 @@ DOMAIN = "https://www.kevlatus.de"
 
 
 def build_page_paths() -> List[str]:
-    exclude_pattern = re.compile(r"\\[_[][^.]*.tsx")
+    exclude_pattern = re.compile(
+        r"[\\/][_[][^.]*.tsx"
+    )  # start with backward (Windows) or forward (Linux) slash
     return [
         file_path.replace("pages\\", "")
+        .replace("pages/", "")
         .replace(".tsx", "")
         .replace("\\index", "")
+        .replace("/index", "")
         .replace("index", "")
         for file_path in glob.glob("pages/**/*.tsx", recursive=True)
         if exclude_pattern.search(file_path) is None
