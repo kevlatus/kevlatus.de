@@ -9,6 +9,7 @@ from src.blog import (
     write_article_file,
     write_article_list,
 )
+from src.rss import build_rss_feed, write_rss_feed
 from src.sitemap import build_sitemap, write_sitemap
 
 if __name__ == "__main__":
@@ -25,3 +26,6 @@ if __name__ == "__main__":
 
     sitemap = build_sitemap(articles)
     write_sitemap(sitemap)
+
+    rss_feed = build_rss_feed(articles)
+    write_rss_feed(rss_feed)

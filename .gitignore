@@ -3,6 +3,7 @@
 public/assets/blog/articles
 public/assets/blog/articles.json
 public/sitemap.xml
+public/rss.xml
 __pycache__
 
 .idea/
