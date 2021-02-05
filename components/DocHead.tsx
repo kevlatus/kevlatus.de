@@ -52,6 +52,7 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({
 
       <title>{title}</title>
 
+      <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
       <link rel="icon" href="/assets/images/ic-kevlatus-circle-48.png" />
       <link
         rel="apple-touch-icon"
