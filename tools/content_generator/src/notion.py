@@ -1,19 +1,8 @@
-from __future__ import annotations
-
-from datetime import datetime
-import json
+import numpy as np
 import notion.block
 from notion.client import NotionClient
 from notion.collection import CollectionRowBlock, CollectionView
-import numpy as np
-from os import environ, path
-from pathlib import Path
-from slugify import slugify
-from typing import Any, Dict, List, Tuple
-
-
-DIR_BLOG = path.join("public", "assets", "blog")
-DIR_ARTICLES = path.join(DIR_BLOG, "articles")
+from typing import Any, List
 
 
 def get_table_data(view: CollectionView) -> List[List[Any]]:
@@ -157,7 +146,7 @@ def convert_block_to_markdown(
         return None
 
 
-def fetch_article_markdown(client: NotionClient, id: str) -> str:
+def fetch_page_markdown(client: NotionClient, id: str) -> str:
     page = client.get_block(id)
     block_pairs = zip(page.children, [None] + page.children[:-1])
     converted_blocks = [
@@ -166,106 +155,6 @@ def fetch_article_markdown(client: NotionClient, id: str) -> str:
     return "\n".join([b for b in converted_blocks if b is not None])
 
 
-def split_article_content(markdown: str) -> Tuple[str, str]:
-    lines = markdown.split("\n")
-    title = lines[0][3:]
-    content = "\n".join(lines[2:])
-    return title, content
-
-
-class Article(object):
-    id: str
-    timestamp: datetime
-    slug: str
-    content: str
-    title: str
-    status: str
-    description: str
-
-    def __init__(
-        self,
-        id: str,
-        title: str,
-        content: str,
-        timestamp: str,
-        status: str,
-        description: str,
-    ) -> None:
-        super().__init__()
-        self.id = id
-        self.timestamp = timestamp
-        self.title = title
-        self.content = content
-        self.slug = slugify(title)
-        self.status = status
-        self.description = description
-
-    @property
-    def content_path(self):
-        return path.join(DIR_ARTICLES, "{}.md".format(self.slug))
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "content": self.content_path,
-            "slug": self.slug,
-            "timestamp": self.timestamp.isoformat()
-            if self.timestamp is not None
-            else None,
-            "title": self.title,
-            "status": self.status,
-            "description": self.description,
-        }
-
-    @staticmethod
-    def from_notion_row(client: NotionClient, row: CollectionRowBlock) -> Article:
-        markdown = fetch_article_markdown(client, row.id)
-        title, content = split_article_content(markdown)
-        description = content[:60] + "..."
-        timestamp = (
-            row.get_property("Release Date").start
-            if row.get_property("Release Date") is not None
-            else None
-        )
-        return Article(
-            id=row.id,
-            title=title,
-            content=content,
-            timestamp=timestamp,
-            status=row.Status,
-            description=description,
-        )
-
-
-def write_article_file(article: Article) -> None:
-    with open(
-        path.join(DIR_ARTICLES, "{}.md".format(article.slug)), "w", encoding="utf-8"
-    ) as file:
-        file.write(article.content)
-
-
-def fetch_articles(client: NotionClient) -> List[Article]:
-    blog_pipeline = client.get_collection_view(
-        "https://www.notion.so/165caedb0c704c538f4734687b6d10e6?v=03bee239ca704373b3cb2fb63d80271f"
-    )
-    rows = [
-        row
-        for row in blog_pipeline.collection.get_rows()
-        if row.Status in ["1 draft", "2 final"]
-    ]
-    return [Article.from_notion_row(client, row) for row in rows]
-
-
-notion_client = NotionClient(token_v2=environ.get("NOTION_TOKEN"))
-
-articles = fetch_articles(notion_client)
-Path(DIR_ARTICLES).mkdir(parents=True, exist_ok=True)
-for article in articles:
-    write_article_file(article)
-
-article_json = json.dumps(
-    {
-        "articles": [article.to_dict() for article in articles],
-    }
-)
-with open(path.join(DIR_BLOG, "articles.json"), "w", encoding="utf-8") as file:
-    file.write(article_json)
+def fetch_collection(client: NotionClient, url: str) -> List[CollectionRowBlock]:
+    view = client.get_collection_view(url)
+    return [row for row in view.collection.get_rows()]

@@ -2,6 +2,8 @@
 
 public/assets/blog/articles
 public/assets/blog/articles.json
+public/sitemap.xml
+__pycache__
 
 .idea/
 
