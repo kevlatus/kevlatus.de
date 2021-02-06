@@ -4,4 +4,4 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
-    Content-Security-Policy = "default-src 'self' *.typekit.net *.matomo.cloud 'unsafe-inline'; img-src https://*; media-src https://*;"
+    Content-Security-Policy = "default-src 'self' *.typekit.net *.usefathom.com 'unsafe-inline'; img-src https://*; media-src https://*;"
