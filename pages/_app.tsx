@@ -8,6 +8,7 @@ function KevlatusApp({ Component, pageProps }) {
   const router = useRouter();
   useEffect(() => {
     Fathom.load("JIWYJDVS", {
+      url: "https://mosquito.kevlatus.de/script.js",
       includedDomains: ["www.kevlatus.de", "kevlatus.de"],
     });
 
