@@ -122,6 +122,23 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({
         as="style"
       />
       <link rel="stylesheet" href="https://use.typekit.net/xhs5wzt.css" />
+
+      {process.env.NODE_ENV === "production" ? (
+        <>
+          <script
+            async
+            defer
+            data-domain="www.kevlatus.de"
+            src="https://stats.kevlatus.de/js/plausible.outbound-links.js"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html:
+                "window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }",
+            }}
+          />
+        </>
+      ) : null}
     </Head>
   );
 };
