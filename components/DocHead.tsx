@@ -49,9 +49,7 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
       />
-
       <title>{title}</title>
-
       <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
       <link rel="icon" href="/assets/images/ic-kevlatus-circle-48.png" />
       <link
@@ -94,9 +92,7 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({
         sizes="512x512"
         href="/assets/images/ic-kevlatus-circle-512.png"
       />
-
       <meta name="theme-color" content="#3786E9" />
-
       <meta property="author" content="Kevin Latusinski" />
       <meta name="description" content={description} />
       <meta property="og:description" content={description} />
@@ -115,7 +111,6 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({
         property="twitter:image"
         content="https://raw.githubusercontent.com/kevlatus/kevlatus.de/main/public/assets/images/ic-kevlatus-circle-512.png"
       />
-
       <link
         rel="preload"
         href="https://use.typekit.net/xhs5wzt.css"
@@ -123,7 +118,8 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({
       />
       <link rel="stylesheet" href="https://use.typekit.net/xhs5wzt.css" />
 
-      {process.env.NODE_ENV === "production" ? (
+      {/* Workaround as given by: https://github.com/vercel/next.js/issues/9070#issuecomment-552981178 */}
+      {process.browser && process.env.NODE_ENV === "production" ? (
         <>
           <script
             async
