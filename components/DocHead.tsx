@@ -125,7 +125,8 @@ const DocHead: FunctionComponent<DocHeadProps> = function ({
             async
             defer
             data-domain="www.kevlatus.de"
-            src="https://stats.kevlatus.de/js/plausible.outbound-links.js"
+            data-api="/a/api/event"
+            src="/a/js/script.js"
           />
           <script
             dangerouslySetInnerHTML={{
