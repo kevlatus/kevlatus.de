@@ -1,4 +1,0 @@
-{
-    "python.pythonPath": "tools\\article-fetcher\\venv\\Scripts\\python.exe",
-    "python.formatting.provider": "black"
-}
