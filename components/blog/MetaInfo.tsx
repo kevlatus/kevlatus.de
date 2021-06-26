@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { Article } from "../../services/blog";
+import { Article } from "@models/blog";
 
 function computeReadingTime(text: string): number {
   text = text.replace(/[^a-zA-Z0-9.!?:;\-()\s]/g, "");
@@ -26,7 +26,11 @@ export const ArticleTimestamp: FunctionComponent<MetaInfoProps> = function ({
   className,
   article,
 }) {
-  const date = new Date(Date.parse(article.timestamp));
+  if (!article.date) {
+    return null;
+  }
+
+  const date = new Date(Date.parse(article.date));
   const day = date.getDate().toString().padStart(2, "0");
   const month = [
     "January",
