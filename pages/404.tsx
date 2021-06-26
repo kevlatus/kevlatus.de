@@ -1,4 +1,6 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+
+import DocHead, { defaultDescription } from "@components/DocHead";
 
 declare const plausible: Function;
 
@@ -9,5 +11,14 @@ export default function PageNotFound() {
     }
   }, []);
 
-  return <h1>404 - Page Not Found</h1>;
+  return (
+    <>
+      <DocHead
+        path="/404"
+        title="404 - not found"
+        description={defaultDescription}
+      />
+      <h1>404 - Page Not Found</h1>
+    </>
+  );
 }
