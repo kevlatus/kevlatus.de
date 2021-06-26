@@ -1,8 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-#public/assets/blog/articles
-#public/assets/blog/articles.json
-#public/sitemap.xml
+public/sitemap.xml
 #public/rss.xml
 __pycache__
 
