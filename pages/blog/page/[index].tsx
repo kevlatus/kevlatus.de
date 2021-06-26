@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetStaticPaths, GetStaticProps } from "next";
 import React, { FunctionComponent } from "react";
 
 import AppLayout from "@components/AppLayout";
@@ -8,19 +8,19 @@ import { Article, blogConfig } from "@models/blog";
 import { articleApi } from "@services/blog-api";
 import Pagination from "@components/Pagination";
 
-interface BlogIndexProps {
+interface BlogIndexPageProps {
   readonly articles: Article[];
   readonly currentPage: number;
   readonly totalPages: number;
 }
 
-const BlogIndex: FunctionComponent<BlogIndexProps> = function (props) {
+const BlogIndexPage: FunctionComponent<BlogIndexPageProps> = function (props) {
   const { articles, currentPage, totalPages } = props;
   return (
     <>
       <DocHead
-        path="/blog"
-        title="Blog"
+        path={"/blog/page/" + currentPage}
+        title={"Blog - Page " + (currentPage + 1)}
         concatTitle={true}
         description={defaultDescription}
       />
@@ -35,8 +35,11 @@ const BlogIndex: FunctionComponent<BlogIndexProps> = function (props) {
   );
 };
 
-export const getStaticProps: GetStaticProps<BlogIndexProps> = async () => {
-  const articlePage = await articleApi.getArticlePage(0);
+export const getStaticProps: GetStaticProps<BlogIndexPageProps> = async ({
+  params,
+}) => {
+  const currentPage = parseInt(params.index as string, 10);
+  const articlePage = await articleApi.getArticlePage(currentPage);
   const totalPages = Math.ceil(
     articlePage.total / blogConfig.pagination.pageSize
   );
@@ -45,9 +48,28 @@ export const getStaticProps: GetStaticProps<BlogIndexProps> = async () => {
     props: {
       articles: articlePage.items,
       totalPages,
-      currentPage: 0,
+      currentPage,
     },
   };
 };
 
-export default BlogIndex;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const totalPosts = await articleApi.getTotalPostCount();
+  const totalPages = Math.ceil(totalPosts / blogConfig.pagination.pageSize);
+
+  const paths = [];
+
+  /**
+   * Start from page 2, so we don't replicate /blog, which is page 1.
+   */
+  for (let page = 1; page < totalPages; page++) {
+    paths.push({ params: { index: page.toString() } });
+  }
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export default BlogIndexPage;

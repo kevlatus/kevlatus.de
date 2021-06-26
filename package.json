@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
     "start": "next start",
     "export": "next export"
   },
@@ -13,6 +14,7 @@
     "@tailwindcss/typography": "^0.3.1",
     "classnames": "^2.3.1",
     "next": "10.0.4",
+    "next-sitemap": "^1.6.124",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-markdown": "^5.0.3",

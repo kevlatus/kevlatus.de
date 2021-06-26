@@ -2,19 +2,16 @@ import classNames from "classnames";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { FunctionComponent } from "react";
 
-import {
-  Article,
-  fetchArticles,
-  fetchArticlesBySlug,
-} from "../../services/blog";
-import DocHead, { buildPageUrl, PageType } from "../../components/DocHead";
-import AppLayout from "../../components/AppLayout";
-import Markdown from "../../components/Markdown";
-import ArticleMetaInfo from "../../components/blog/MetaInfo";
+import AppLayout from "@components/AppLayout";
+import DocHead, { buildPageUrl, PageType } from "@components/DocHead";
+import Markdown from "@components/Markdown";
+import JoinDiscussionButton from "@components/blog/JoinDiscussionButton";
+import ArticleMetaInfo from "@components/blog/MetaInfo";
+import SaveToPocket from "@components/blog/SaveToPocket";
+import { Article } from "@models/blog";
+import { articleApi } from "@services/blog-api";
 
 import styles from "../../styles/ArticlePage.module.css";
-import SaveToPocket from "../../components/blog/SaveToPocket";
-import JoinDiscussionButton from "../../components/blog/JoinDiscussionButton";
 
 interface ArticlePageProps {
   readonly article: Article;
@@ -68,14 +65,14 @@ export const getStaticProps: GetStaticProps<ArticlePageProps> = async (ctx) => {
   const slug = ctx.params.slug as string;
   return {
     props: {
-      article: await fetchArticlesBySlug(slug),
+      article: await articleApi.getArticleBySlug(slug),
     },
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const articles = await fetchArticles();
-  const paths = articles.map((p) => ({ params: { slug: p.slug } }));
+  const slugs = await articleApi.getSlugs();
+  const paths = slugs.map((it) => ({ params: { slug: it } }));
   return {
     paths,
     fallback: false,

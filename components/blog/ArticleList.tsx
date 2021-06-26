@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { FunctionComponent } from "react";
 
-import { Article } from "../../services/blog";
+import { Article } from "@models/blog";
+
 import { ArticleReadingTime, ArticleTimestamp } from "./MetaInfo";
 
 interface ArticleListItemProps {
