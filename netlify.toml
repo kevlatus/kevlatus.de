@@ -14,6 +14,14 @@
     X-Content-Type-Options = "nosniff"
     Content-Security-Policy = "default-src 'self' *.typekit.net *.kevlatus.de 'unsafe-inline'; img-src https://*; media-src https://*;"
 
+[[headers]]
+  for = "/_next*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = "default-src 'self' *.typekit.net *.kevlatus.de 'unsafe-inline'; img-src https://*; media-src https://*;"
+
 [[redirects]]
   from = "/a/js/script.js"
   to = "https://plausible.io/js/plausible.outbound-links.js"
